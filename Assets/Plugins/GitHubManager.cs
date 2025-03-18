@@ -3,17 +3,20 @@ using System.Collections;
 using System.Net;
 using System.Text;
 using System.IO;
+using UnityEngine.UI;
 
 public class GitHubManager : MonoBehaviour
-{
+{    
+    private string token; // 你的GitHub个人访问令牌
+    private string repoOwner = "ruaxins"; // 你的GitHub用户名
+    private string repoName = "test01"; // 你的GitHub仓库名
     private void Start()
     {
         System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+        token = GameObject.Find("API").GetComponent<InputField>().text;
     }
-    //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
-    public string token; // 你的GitHub个人访问令牌
-    private string repoOwner = "ruaxins"; // 你的GitHub用户名
-    private string repoName = "test01"; // 你的GitHub仓库名
+
+
 
     //创建issue
     public void CreateIssue(string title, string body)

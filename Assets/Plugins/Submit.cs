@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using System.IO;
+using System.Text;
+using UnityEngine.UI;
 
 public class Submit : MonoBehaviour
 {
@@ -10,8 +12,7 @@ public class Submit : MonoBehaviour
     public string repoPath = "D:\\Study\\Unity\\Programs\\Card";
     public string branchName;
 
-    //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
-    public string token; // 你的GitHub个人访问令牌
+    private string token; // 你的GitHub个人访问令牌
     private string repoOwner = "ruaxins"; // 你的GitHub用户名
     private string repoName = "test01"; // 你的GitHub仓库名
 
@@ -19,7 +20,10 @@ public class Submit : MonoBehaviour
     private string repoUrl = "https://github.com/rauxins/test01.git";
     // 下载路径
     private string downloadPath = "D:\\Study\\Unity\\Programs";
-
+    private void Start()
+    {
+        token = GameObject.Find("API").GetComponent<InputField>().text;
+    }
     public void CommitChanges(string commitMessage)
     {
         // 添加所有修改的文件
