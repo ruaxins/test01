@@ -10,7 +10,8 @@ public class GitHubManager : MonoBehaviour
     {
         System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
     }
-    private string token = "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"; // 你的GitHub个人访问令牌
+    //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
+    public string token; // 你的GitHub个人访问令牌
     private string repoOwner = "ruaxins"; // 你的GitHub用户名
     private string repoName = "test01"; // 你的GitHub仓库名
 

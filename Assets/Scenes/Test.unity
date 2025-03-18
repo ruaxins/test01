@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fc219a8df3c8b43a4813f04411b525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  token: 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
 --- !u!4 &157277491
 Transform:
   m_ObjectHideFlags: 0
@@ -878,6 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fc219a8df3c8b43a4813f04411b525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  token: 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
 --- !u!114 &464406947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2235,6 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fc219a8df3c8b43a4813f04411b525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  token: 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
 --- !u!114 &987238659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2407,6 +2410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fc219a8df3c8b43a4813f04411b525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  token: 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
 --- !u!114 &1003826959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4392,7 +4396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   repoPath: D:\Study\Unity\Programs\Card
-  branchName: test
+  branchName: yes
+  token: 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
 --- !u!1 &1617394362
 GameObject:
   m_ObjectHideFlags: 0
