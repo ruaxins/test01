@@ -9,17 +9,17 @@ using UnityEngine.UI;
 public class Submit : MonoBehaviour
 {
     // Git仓库的路径
-    public string repoPath = "D:\\Study\\Unity\\Programs\\Card";
+    public string repoPath = "D:\\Study\\Unity\\Programs\\Puzzle";
     public string branchName;
 
     private string token; // 你的GitHub个人访问令牌
     private string repoOwner = "ruaxins"; // 你的GitHub用户名
-    private string repoName = "test01"; // 你的GitHub仓库名
+    private string repoName = "test-repo"; // 你的GitHub仓库名
 
     // Git仓库的URL
-    private string repoUrl = "https://github.com/rauxins/test01.git";
+    private string repoUrl = "https://github.com/rauxins/test-repo.git";
     // 下载路径
-    private string downloadPath = "D:\\Study\\Unity\\Programs";
+    private string downloadPath = "D:\\Study\\Unity\\Programs\\Puzzle";
     private void Start()
     {
         token = GameObject.Find("API").GetComponent<InputField>().text;
