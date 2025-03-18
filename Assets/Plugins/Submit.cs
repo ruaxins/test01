@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using System.IO;
 
 public class Submit : MonoBehaviour
 {
     // Git仓库的路径
     public string repoPath = "D:\\Study\\Unity\\Programs\\Card";
     public string branchName;
+
+    private string token = "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"; // 你的GitHub个人访问令牌
+    private string repoOwner = "ruaxins"; // 你的GitHub用户名
+    private string repoName = "test01"; // 你的GitHub仓库名
+
+    // Git仓库的URL
+    private string repoUrl = "https://github.com/rauxins/test01.git";
+    // 下载路径
+    private string downloadPath = "D:\\Study\\Unity\\Programs";
 
     public void CommitChanges(string commitMessage)
     {
@@ -19,6 +29,18 @@ public class Submit : MonoBehaviour
 
         // 推送提交到远程仓库
         RunGitCommand("push origin " + branchName);
+    }
+
+    public void DownloadBranch(string branchName)
+    {
+        // 确保下载路径存在
+        if (!Directory.Exists(downloadPath))
+        {
+            Directory.CreateDirectory(downloadPath);
+        }
+
+        // 克隆仓库的特定分支
+        RunGitCommand($"clone --branch {branchName} --single-branch {repoUrl} {downloadPath}");
     }
 
     private void RunGitCommand(string command)
