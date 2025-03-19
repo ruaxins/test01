@@ -6,14 +6,17 @@ using System.IO;
 using UnityEngine.UI;
 
 public class GitHubManager : MonoBehaviour
-{    
-    private string token; // 你的GitHub个人访问令牌
-    private string repoOwner = "ruaxins"; // 你的GitHub用户名
-    private string repoName = "test-repo"; // 你的GitHub仓库名
+{
+    private string token;
+    private string repoOwner;
+    private string repoName;
     private void Start()
     {
         System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-        token = GameObject.Find("API").GetComponent<InputField>().text;
+        token = Value.Instance.Token; // 你的GitHub个人访问令牌
+        repoOwner = Value.Instance.Username; // 你的GitHub用户名
+        repoName = Value.Instance.Reponame; // 你的GitHub仓库名
+
     }
 
 
@@ -94,7 +97,7 @@ public class GitHubManager : MonoBehaviour
             }
         }
     }
-    //合并拉取请求:pullNumber_拉取请求的编号，commitTitle_合并目标分支，commitMessage_合并注释
+    //合并拉取请求:pullNumber_拉取请求的编号，commitTitle_合并标题，commitMessage_合并注释
     //同意请求
     public void MergePullRequest(int pullNumber, string commitTitle, string commitMessage)
     {
@@ -136,7 +139,7 @@ public class GitHubManager : MonoBehaviour
     {
         string url = $"https://api.github.com/repos/{repoOwner}/{repoName}/git/refs";
         string json = $"{{\"ref\": \"refs/heads/{branchName}\", \"sha\": \"{baseSha}\"}}";
-
+        
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         request.Method = "POST";
         request.ContentType = "application/json";
@@ -180,6 +183,7 @@ public class GitHubManager : MonoBehaviour
 
         try
         {
+            Debug.Log(token);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
             {

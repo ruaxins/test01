@@ -123,3 +123,6 @@ Assets/Plugins/Sirenix/Demos/*
 # Gaia
 Assets/Procedural*Worlds/Gaia/Asset*Samples/*
 Assets/Samples/Terrain*Tools/*
+
+# 忽略包含Token的文件
+Assets/StreamingAssets/token.txt

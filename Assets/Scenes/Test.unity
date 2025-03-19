@@ -517,6 +517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157277491}
   - component: {fileID: 157277490}
+  - component: {fileID: 157277492}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -551,6 +552,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &157277492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157277489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c439234f8ff9e4ca8312bfd782fd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &226173273
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,8 +5082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9534babf0cf5844999445eef6896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repoPath: D:\Study\Unity\Programs\Card
-  branchName: yes
+  repoPath: D:\Study\Unity\Programs\Puzzle
+  branchName: main
 --- !u!1 &1617394362
 GameObject:
   m_ObjectHideFlags: 0

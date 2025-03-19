@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class Project : MonoBehaviour
 {
+    private string token = Value.Instance.Token; // 你的GitHub个人访问令牌
+    private string repoOwner = Value.Instance.Username; // 你的GitHub用户名
+    private string repoName = Value.Instance.Reponame; // 你的GitHub仓库名
     // Git仓库的路径
-    private string repoPath = "D:\\Study\\Unity\\Programs\\Puzzle";
+    private string repoPath = Value.Instance.Path;
     // 远程仓库URL
-    private string remoteUrl = "https://github.com/ruaxins/test-repo";
-    private string uesename = "ruaxin";
-    private string email = "2602656638@qq.com";
+    private string remoteUrl = "https://github.com/{repoOwner}/{repoName}";
+    private string uesename = Value.Instance.Username;
+    private string email = Value.Instance.Email;
 
     public void OnCreateClick()
     {
         // 初始化仓库
-        //InitializeRepository();
+        InitializeRepository();
 
         // 添加并提交项目文件
-        //AddAndCommitFiles("Initial commit");
+        AddAndCommitFiles("Initial commit");
 
         // 推送到远程仓库
         PushToRemote("main");
@@ -35,6 +38,9 @@ public class Project : MonoBehaviour
 
     public void AddAndCommitFiles(string commitMessage)
     {
+        RunGitCommand($"config --global user.name \"{uesename}\"");
+        RunGitCommand($"config --global user.email \"{email}\"");
+
         // 添加所有文件
         RunGitCommand("add .");
 
@@ -44,8 +50,7 @@ public class Project : MonoBehaviour
 
     public void PushToRemote(string branchName)
     {
-        RunGitCommand($"config --global user.name \"{uesename}\"");
-        RunGitCommand($"config --global user.name \"{email}\"");
+
         RunGitCommand($"branch -M {branchName}");
         // 推送到远程仓库
         RunGitCommand($"push -u origin {branchName}");

@@ -9,20 +9,23 @@ using UnityEngine.UI;
 public class Submit : MonoBehaviour
 {
     // Git仓库的路径
-    public string repoPath = "D:\\Study\\Unity\\Programs\\Puzzle";
+    private string repoPath;
     public string branchName;
 
-    private string token; // 你的GitHub个人访问令牌
-    private string repoOwner = "ruaxins"; // 你的GitHub用户名
-    private string repoName = "test-repo"; // 你的GitHub仓库名
+    private string repoOwner;
+    private string repoName;
 
     // Git仓库的URL
-    private string repoUrl = "https://github.com/rauxins/test-repo.git";
+    private string repoUrl;
     // 下载路径
-    private string downloadPath = "D:\\Study\\Unity\\Programs\\Puzzle";
+    private string downloadPath;
     private void Start()
     {
-        token = GameObject.Find("API").GetComponent<InputField>().text;
+        repoPath = Value.Instance.Path;
+        repoOwner = Value.Instance.Username; // 你的GitHub用户名
+        repoName = Value.Instance.Reponame; // 你的GitHub仓库名
+        repoUrl = "https://github.com/{repoOwner}/{repoName}.git";
+        downloadPath = Value.Instance.Path;
     }
     public void CommitChanges(string commitMessage)
     {

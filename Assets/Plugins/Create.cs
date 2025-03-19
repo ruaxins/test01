@@ -6,7 +6,7 @@ using UnityEngine;
 public class Create : MonoBehaviour
 {
     // GitHub Token
-    private string token = "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";
+    private string token = Value.Instance.Token;
 
     public void OnCreateClick()
     {
