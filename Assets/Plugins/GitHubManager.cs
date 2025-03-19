@@ -183,7 +183,6 @@ public class GitHubManager : MonoBehaviour
 
         try
         {
-            Debug.Log(token);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
             {

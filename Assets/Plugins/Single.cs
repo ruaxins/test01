@@ -14,7 +14,6 @@ public class Single : MonoBehaviour
         {
             // 读取文件内容
             Value.Instance.Token = File.ReadAllText(filePath);
-            Debug.Log(Value.Instance.Token);
         }
         else
         {
