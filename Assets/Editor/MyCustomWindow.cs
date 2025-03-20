@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,7 +8,7 @@ public class MyCustomWindow : EditorWindow
     string new_branchName = "";
     string original_branchName;
     string delete_branchName;
-    string now_branchName;
+    //string now_branchName;
     string updatemessage;
     string merge_title;
     string merge_branchName;
@@ -46,12 +48,12 @@ public class MyCustomWindow : EditorWindow
                     if (!string.IsNullOrEmpty(baseSha))
                     {
                         tools.CreateBranch(new_branchName, baseSha);
-                        Debug.Log("创建成功");
+                        UnityEngine.Debug.Log("创建成功");
                     }
                     else
                     {
-                        Debug.Log(baseSha);
-                        Debug.LogError("Failed to get base branch SHA.");
+                        UnityEngine.Debug.Log(baseSha);
+                        UnityEngine.Debug.LogError("Failed to get base branch SHA.");
                     }
                     
                 }
@@ -79,7 +81,7 @@ public class MyCustomWindow : EditorWindow
                 {
                     //删除分支
                     tools.DeleteBranch(delete_branchName);
-                    Debug.Log("删除成功");
+                    UnityEngine.Debug.Log("删除成功");
                 }
                 catch
                 {
@@ -89,11 +91,11 @@ public class MyCustomWindow : EditorWindow
         }
 
         GUILayout.Label("\n更新分支", EditorStyles.boldLabel);
-        now_branchName = EditorGUILayout.TextField("更新分支名称:", now_branchName);
+        //now_branchName = EditorGUILayout.TextField("更新分支名称:", now_branchName);
         updatemessage = EditorGUILayout.TextField("更新信息:", updatemessage);
         if (GUILayout.Button("更新"))
         {
-            if (!string.IsNullOrEmpty(now_branchName))
+            if (!string.IsNullOrEmpty(updatemessage))
             {
                 bool isConfirmed = EditorUtility.DisplayDialog(
                     "Confirmation", // 弹窗标题
@@ -105,8 +107,8 @@ public class MyCustomWindow : EditorWindow
                 try
                 {
                     //更新分支
-                    tools.CommitChanges(now_branchName, updatemessage);
-                    Debug.Log("更新成功");
+                    tools.CommitChanges(updatemessage);
+                    UnityEngine.Debug.Log("更新成功");
                 }
                 catch
                 {
@@ -137,7 +139,7 @@ public class MyCustomWindow : EditorWindow
                     //合并分支
                     int num = tools.CreatePullRequest(merge_title, merge_branchName, merged_branchName, merge_body);
                     tools.MergePullRequest(num, merge_title, merge_body);
-                    Debug.Log("合并成功");
+                    UnityEngine.Debug.Log("合并成功");
                 }
                 catch
                 {

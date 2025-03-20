@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Tool : MonoBehaviour
@@ -521,7 +523,7 @@ public class Tools
         }
     }
     //递交修改
-    public void CommitChanges(string branchName, string commitMessage)
+    public void CommitChanges(string commitMessage)
     {
         // 添加所有修改的文件
         RunGitCommand("add .");
@@ -530,7 +532,7 @@ public class Tools
         RunGitCommand($"commit -m \"{commitMessage}\"");
 
         // 推送提交到远程仓库
-        RunGitCommand("push origin " + branchName);
+        RunGitCommand("push origin " + GetBranch());
     }
     //获取分支
     public void DownloadBranch(string branchName)
@@ -570,14 +572,55 @@ public class Tools
 
         process.WaitForExit();
 
-        // 打印输出
-        if (!string.IsNullOrEmpty(output))
+        // 判断是否成功
+        if (process.ExitCode == 0)
         {
-            UnityEngine.Debug.Log("Git Output: " + output);
+            UnityEngine.Debug.Log("执行成功");
+            UnityEngine.Debug.Log("Output: " + output);
         }
-        if (!string.IsNullOrEmpty(error))
+        else
         {
-            UnityEngine.Debug.LogError("Git Error: " + error);
+            UnityEngine.Debug.Log("执行失败");
+            UnityEngine.Debug.Log("Error: " + error);
+        }
+    }
+
+    private string GetBranch()
+    {
+        // 配置 ProcessStartInfo
+        ProcessStartInfo processStartInfo = new ProcessStartInfo("git", "rev-parse --abbrev-ref HEAD")
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
+        // 启动进程
+        using (Process process = new Process())
+        {
+            process.StartInfo = processStartInfo;
+            process.Start();
+
+            // 读取标准输出
+            string branchName = process.StandardOutput.ReadToEnd().Trim();
+            // 读取标准错误
+            string error = process.StandardError.ReadToEnd();
+
+            // 等待进程结束
+            process.WaitForExit();
+
+            // 判断是否成功
+            if (process.ExitCode == 0)
+            {
+                return branchName;
+            }
+            else
+            {
+                UnityEngine.Debug.Log("检测分支失败");
+                UnityEngine.Debug.Log("Error: " + error);
+                return null;
+            }
         }
     }
 }
