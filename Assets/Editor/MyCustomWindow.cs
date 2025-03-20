@@ -7,10 +7,12 @@ public class MyCustomWindow : EditorWindow
     string original_branchName;
     string delete_branchName;
     string now_branchName;
+    string updatemessage;
     string merge_title;
     string merge_branchName;
     string merged_branchName;
     string merge_body;
+    Tools tools = new Tools();
 
     // 定义一个菜单项，用于打开窗口
     [MenuItem("Tools/Git")]
@@ -40,7 +42,18 @@ public class MyCustomWindow : EditorWindow
                 try
                 {
                     //创建分支
-                    Debug.Log("创建成功");
+                    string baseSha = tools.GetBranchSha(original_branchName);
+                    if (!string.IsNullOrEmpty(baseSha))
+                    {
+                        tools.CreateBranch(new_branchName, baseSha);
+                        Debug.Log("创建成功");
+                    }
+                    else
+                    {
+                        Debug.Log(baseSha);
+                        Debug.LogError("Failed to get base branch SHA.");
+                    }
+                    
                 }
                 catch
                 {
@@ -65,6 +78,7 @@ public class MyCustomWindow : EditorWindow
                 try
                 {
                     //删除分支
+                    tools.DeleteBranch(delete_branchName);
                     Debug.Log("删除成功");
                 }
                 catch
@@ -76,6 +90,7 @@ public class MyCustomWindow : EditorWindow
 
         GUILayout.Label("\n更新分支", EditorStyles.boldLabel);
         now_branchName = EditorGUILayout.TextField("更新分支名称:", now_branchName);
+        updatemessage = EditorGUILayout.TextField("更新信息:", updatemessage);
         if (GUILayout.Button("更新"))
         {
             if (!string.IsNullOrEmpty(now_branchName))
@@ -90,6 +105,7 @@ public class MyCustomWindow : EditorWindow
                 try
                 {
                     //更新分支
+                    tools.CommitChanges(now_branchName, updatemessage);
                     Debug.Log("更新成功");
                 }
                 catch
@@ -119,6 +135,8 @@ public class MyCustomWindow : EditorWindow
                 try
                 {
                     //合并分支
+                    int num = tools.CreatePullRequest(merge_title, merge_branchName, merged_branchName, merge_body);
+                    tools.MergePullRequest(num, merge_title, merge_body);
                     Debug.Log("合并成功");
                 }
                 catch
@@ -127,5 +145,6 @@ public class MyCustomWindow : EditorWindow
                 }
             }
         }
+
     }
 }

@@ -5,21 +5,7 @@ using UnityEngine;
 
 public class Single : MonoBehaviour
 {
-    private void Start()
-    {
-        string filePath = Path.Combine(Application.streamingAssetsPath, "token.txt");
 
-        // 检查文件是否存在
-        if (File.Exists(filePath))
-        {
-            // 读取文件内容
-            Value.Instance.Token = File.ReadAllText(filePath);
-        }
-        else
-        {
-            Debug.LogError("File not found: " + filePath);
-        }
-    }
 }
 public class Value
 {
